@@ -4,6 +4,8 @@ pip install langchain
 pip install langchain_community
 pip install neo4j
 pip install langchain_text_splitters
+pip install langchain_experimental
+pip install json_repair
 pip install llama-index-graph-stores-neo4j
 
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
