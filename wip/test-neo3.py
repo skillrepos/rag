@@ -50,7 +50,7 @@ documents = SimpleDirectoryReader(
 ).load_data()
 
 # Store Knowledge Graph in Neo4j
-graph_store = Neo4jGraphStore(url="bolt://localhost:7687", username="neo4j", password="admin001")
+graph_store = Neo4jGraphStore(url="bolt://localhost:7687", username="neo4j", password="admin001", database="neo4j")
 # graph_store.write_graph(graph_documents)
 storage_context = StorageContext.from_defaults(graph_store=graph_store)
 
