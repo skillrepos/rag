@@ -1,3 +1,6 @@
+# ref: https://docs.llamaindex.ai/en/stable/examples/index_structs/knowledge_graph/Neo4jKGIndexDemo/
+# ref: https://docs.llamaindex.ai/en/stable/examples/index_structs/knowledge_graph/KnowledgeGraphDemo/#visualizing-the-graph
+
 from llama_index.graph_stores.neo4j import Neo4jGraphStore
 from llama_index.core import StorageContext
 from llama_index.core import Settings
@@ -66,7 +69,17 @@ query_engine = index.as_query_engine(
     include_text=False, response_mode="tree_summarize"
 )
 
-response = query_engine.query("Tell me more about prismaticAI")
+response = query_engine.query(
+    "Tell me more about prismaticAI",
+)
 
+print (response)
 display(Markdown(f"<b>{response}</b>"))
 
+## create graph
+from pyvis.network import Network
+
+g = index.get_networkx_graph()
+net = Network(notebook=True, cdn_resources="in_line", directed=True)
+net.from_nx(g)
+net.show("example.html")
