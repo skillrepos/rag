@@ -37,7 +37,7 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 # Initialize LLM
 llm = Ollama(model="mistral",temperature=0)
 
-embed_model = HuggingFaceEmbedding(model_name='mxbai-embed-large:latest')
+embed_model = HuggingFaceEmbedding(model_name='mixedbread-ai/mxbai-embed-large-v1')
 Settings.llm = llm
 Settings.embed_model = embed_model
 
