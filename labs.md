@@ -1,26 +1,57 @@
-# Generative AI for Developers Deep Dive
-## Understanding key Gen AI concepts - full-day workshop
+# Gen AI: Understanding and Using RAG
+## Making LLMs smarter by pairing your data with Gen AI
 ## Session labs 
-## Revision 2.3 - 08/07/24
+## Revision 1.0 - 09/16/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
 **NOTE: To copy and paste in the codespace, you may need to use keyboard commands - CTRL-C and CTRL-V. Chrome may work best for this.**
 
-**Lab 1 - Working with Neural Networks**
+**Lab 1 - Implementing basic RAG with prompt context**
 
-**Purpose: In this lab, we’ll learn more about neural networks by seeing how one is coded and trained.**
+**Purpose: In this lab, we’ll see a basic example of RAG by retrieving prompt context from a data file.**
 
-1. In our repository, we have a set of Python programs to help us illustrate and work with concepts in the labs. These are mostly in the *genai* subdirectory. Go to the *TERMINAL* tab in the bottom part of your codespace and change into that directory.
+1. First, download and install Ollama to allow us to have a local LLM to query. To get *ollama* downloaded, execute the command below. Then you can run the actual application to see usage.
+```
+curl -fsSL https://ollama.com/install.sh | sh
+```
+![downloading ollama](./images/dga36.png?raw=true "downloading ollama")
+
+2. Next, start the ollama server running and pull down the *llama3* model with the following command:
+```
+ollama serve && ollama pull llama3 &
+```
+![downloading ollama](./images/dga37.png?raw=true "downloading ollama")
+
+3. While this is running, go ahead 
+4. In our repository, we have a set of Python programs to help us illustrate and work with concepts in the labs. These are mostly in the *genai* subdirectory. Go to the *TERMINAL* tab in the bottom part of your codespace and change into that directory.
 ```
 cd genai
 ```
 
-2. For this lab, we have a simple neural net coded in Python. The file name is nn.py. Open the file either by clicking on [**genai/nn.py**](./genai/nn.py) or by entering the command below in the codespace's terminal.
+4. For this lab, we have a simple Pyton program that queries the LLM about the benefits of Python in general. The file name is lab1.py. Open the file either by clicking on [**genai/lab1.py**](./genai/lab1.py) or by entering the command below in the codespace's terminal.
 
 ```
-code nn.py
+code lab1.py
 ```
+
+5. You can look around this file to see how it works. When you are done, go ahead and run the file with the command below. 
+
+```
+python lab1.py
+```
+
+6. This will take several minutes to run. In the meantime, let's create a copy of the program that adds context from a local *knowledge base*. So we can continue working while the other prompt is running, open a second terminal session. In the codespace, right-click and select the Split Terminal option. This will add a second terminal side-by-side with your other one.
+
+  
+7. For purposes of keeping things simple and quick, we have a local file named knowledge_base.txt that we'll use for the additional context. The file name is data/kb.txt. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.
+
+```
+code ../data/kb.txt
+```
+
+8. Now let's update the python file to pass the context from the file. First, after the imports, add the code below to read in the data file.
+
 
 3. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the sample inputs ends up being the same as the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc. The table below may help to explain.
 
