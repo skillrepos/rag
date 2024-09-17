@@ -21,7 +21,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 ollama serve && ollama pull llama3 &
 ```
-![serve and pull](./images/rag06.png?raw=true "serve and pull")
+![serve and pull](./images/rag06a.png?raw=true "serve and pull")
 
 3. While this is running, go ahead and open a second terminal session. In the codespace, right-click and select the *Split Terminal* option. This will add a second terminal side-by-side with your other one.
 
