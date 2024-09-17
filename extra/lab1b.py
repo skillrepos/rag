@@ -2,7 +2,7 @@ import requests
 import json
  
 # Read the text from the file
-with open("knowledge_base.txt", "r") as file:
+with open("../data/kb.txt", "r") as file:
     knowledge_data = file.read()
  
 # Define the local LLM endpoint (Ollama)
