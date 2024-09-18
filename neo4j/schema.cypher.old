@@ -1,0 +1,2 @@
+CREATE (p:Person{name: "Paras Bansal"});
+CREATE (a:Address{id:1, firstline: "AAAA", zip: "ABCDEF", country: "Canada"});
