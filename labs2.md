@@ -92,18 +92,54 @@ python lab1.py
 
 **Purpose: In this lab, we'll see how vectorize and query data from a knowledge base that we can then have the LLM expand on.**
 
-1. For this lab, in the same *genai* directory, we have a simple Python program to read a knowledge base and store it in a vectorized format that we can then query against for matches. The file name is lab2.py. Open the file either by clicking on [**genai/lab2.py**](./genai/lab2.py) or by entering the command below in the codespace's terminal.
-
-```
-code lab2.py
-```
-
-2. Since we need a *knowledge base* to work with, we have a local file that we'll use. The file name is *data/kb.json*. Open the file either by clicking on [**data/kb.json**](./data/kb.json) or by entering the command below in the codespace's terminal.  
+1. Since we need a *knowledge base* to work with, we have a local file that we'll use. The file name is *data/kb.json*. Open the file either by clicking on [**data/kb.json**](./data/kb.json) or by entering the command below in the codespace's terminal.  
 
 ```
 code ../data/kb.json
 ```
 
+2. For this lab, in the same *genai* directory, we have a simple Python program to read the knowledge base and store it in a vectorized format that we can then query against for matches. The file name is lab2.py. Open the file either by clicking on [**genai/lab2.py**](./genai/lab2.py) or by entering the command below in the codespace's terminal.
+
+```
+code lab2.py
+```
+
+3. You can look around this file to see how it works. Notice that it reads in the knowledge base file, vectorizes it, and then uses cosine similarity to find the closest response to the question. 
+
+4. When done looking at the code, go ahead and execute the program using the command below.
+```
+python lab2.py
+```
+![running lab2 file](./images/rag14.png?raw=true "running lab2 file")
+
+5. This will take several minutes to run. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
+
+![lab output 1](./images/rag15.png?raw=true "lab output 1")
+
+6. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab2-changes.txt**](./extra/lab2-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
+
+```
+code -d /workspaces/rag/extra/lab2-changes.txt /workspaces/genai/lab2.py
+```
+7. Once you have this screen up, take a look at the added functionality in the *lab2-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the red arrow (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
+
+![lab 2 diff](./images/rag16.png?raw=true "lab 2 diff")
+
+8. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
+
+```
+python lab2.py
+```
+
+9. After the run is complete, you should see additional data from the LLM related to the additional context.
+
+![lab output 2](./images/rag17.png?raw=true "lab output 2")
+
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+  
 2. This program can be run and passed a model to use for tokenization. To start, we'll be using a model named *bert-base-uncased*. Let's look at this model on huggingface.co.  Go to https://huggingface.co/models and in the *Models* search area, type in *bert-base-uncased*. Select the entry for *google-bert/bert-base-uncased*.
 
 ![Finding bert model on huggingface](./images/gaidd12.png?raw=true "Finding bert model on huggingface")
