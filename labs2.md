@@ -106,34 +106,31 @@ code lab2.py
 
 3. You can look around this file to see how it works. Notice that it reads in the knowledge base file, vectorizes it, and then uses cosine similarity to find the closest response to the question. 
 
-4. When done looking at the code, go ahead and execute the program using the command below.
+4. When done looking at the code, go ahead and execute the program using the command below. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
 ```
 python lab2.py
 ```
 ![running lab2 file](./images/rag14.png?raw=true "running lab2 file")
 
-5. This will take several minutes to run. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
-
-![lab output 1](./images/rag15.png?raw=true "lab output 1")
-
-6. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab2-changes.txt**](./extra/lab2-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
+5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab2-changes.txt**](./extra/lab2-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
 
 ```
-code -d /workspaces/rag/extra/lab2-changes.txt /workspaces/genai/lab2.py
+code -d /workspaces/rag/extra/lab2-changes.txt /workspaces/rag/genai/lab2.py
 ```
-7. Once you have this screen up, take a look at the added functionality in the *lab2-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the red arrow (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
 
-![lab 2 diff](./images/rag16.png?raw=true "lab 2 diff")
+6. Once you have this screen up, take a look at the added functionality in the *lab2-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the arrow between the two files (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
 
-8. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
+![lab 2 diff](./images/rag15.png?raw=true "lab 2 diff")
+
+7. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
 
 ```
 python lab2.py
 ```
 
-9. After the run is complete, you should see additional data from the LLM related to the additional context.
+8. After the run is complete, you should see additional data from the LLM related to the additional context.
 
-![lab output 2](./images/rag17.png?raw=true "lab output 2")
+![lab output 2](./images/rag16.png?raw=true "lab output 2")
 
 <p align="center">
 **[END OF LAB]**
