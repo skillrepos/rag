@@ -1,0 +1,90 @@
+import json
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+ 
+# Load the knowledge base
+with open("../data/kb.json", "r") as file:
+    knowledge_base = json.load(file)
+ 
+# Prepare questions for TF-IDF
+questions = [entry['question'] for entry in knowledge_base]
+ 
+# Initialize the TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(questions)
+
+from py2neo import Graph
+ 
+# Connect to the local Neo4j instance
+graph = Graph("neo4j://localhost:7687", auth=("neo4j", "neo4jtest"))
+
+def query_graph():
+    query = """
+    MATCH (p:Person)-[:WORKED_WITH]->(p2:Person)
+    RETURN p.name AS person, p.profession AS profession, p2.name AS collaborator
+    """
+    result = graph.run(query).data()
+    return result
+
+def retrieve_answer(query):
+    query_vec = vectorizer.transform([query])
+    similarity = cosine_similarity(query_vec, tfidf_matrix).flatten()
+    top_index = similarity.argmax()
+    return knowledge_base[top_index]['answer']
+
+def hybrid_retrieve(query):
+    # Retrieve from text-based knowledge base
+    text_answer = retrieve_answer(query)
+       
+    # Retrieve from Neo4j graph
+    graph_result = query_graph()
+ 
+    # Combine results
+    combined_answer = text_answer + "\nGraph Data:\n"
+    for record in graph_result:
+        combined_answer += f"{record['person']} worked with {record['collaborator']}.\n"
+      
+    return combined_answer
+ 
+# Test hybrid retrieval
+combined_answer = hybrid_retrieve("What is RAG?")
+
+print("Combined Answer:", combined_answer)
+
+result = query_graph()
+
+import requests
+
+# Use Ollama to generate a detailed response based on the retrieved answer
+ollama_url = "http://localhost:11434/api/generate"
+
+# Prepare a prompt from the graph result
+prompt = f"Generate an explanation based on this data:\n\n{combined_answer}"
+
+ 
+# Use Ollama for generation
+query = {
+    "model": "llama3",
+    "prompt": prompt,
+    "stream": False
+}
+ 
+response = requests.post(ollama_url, json=query)
+ 
+# Check if the request was successful
+if response.status_code == 200:
+    # Process the response
+    if query["stream"]:
+        # Handle streaming response
+        for line in response.iter_lines():
+            if line:
+                body = json.loads(line)
+                print(body.get("response", ""))
+    else:
+        # Handle non-streaming response
+        response_data = response.json()
+        print(response_data["response"])
+else:
+    # Print error message
+    print("Error:", response.status_code, response.text)
+
