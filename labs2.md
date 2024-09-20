@@ -162,7 +162,7 @@ code lab3.py
 ```
 python lab3.py
 ```
-![running lab3 file](./images/rag17.png?raw=true "running lab3 file")
+![running lab3 file](./images/rag17a.png?raw=true "running lab3 file")
 
 5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab3-changes.txt**](./extra/lab3-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
 
