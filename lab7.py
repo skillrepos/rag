@@ -14,10 +14,10 @@ enhanced_graph = Neo4jGraph(
 print(enhanced_graph.schema)
 
 chain = GraphCypherQAChain.from_llm(
-    cypher_llm=Ollama(model="llama2",temperature=0),
-    qa_llm=Ollama(model="llama2",temperature=0),
+    cypher_llm=Ollama(model="llama3",temperature=0),
+    qa_llm=Ollama(model="llama3",temperature=0),
     graph=graph, verbose=True,
 )
 
-# chain.invoke({"query": "Who starred in Star Trek: Generations?"})
-chain.run("""Who starred in Star Trek: Generations?""")
+response = chain.invoke({"query": "Who starred in Star Trek: Generations?"})
+print(response["result"])
