@@ -213,21 +213,21 @@ cd ../genai
 2. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab3.py. Open the file either by clicking on [**genai/lab3.py**](./genai/lab3.py) or by entering the command below in the codespace's terminal.
 
 ```
-code lab3.py
+code lab4.py
 ```
 
 3. You can look around this file to see how it works. Notice that it simply connects to the graph database, does a query, and returns the results. 
 
 4. When done looking at the code, go ahead and execute the program using the command below. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
 ```
-python lab3.py
+python lab4.py
 ```
-![running lab3 file](./images/rag17a.png?raw=true "running lab3 file")
+![running lab4 file](./images/rag17a.png?raw=true "running lab4 file")
 
 5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab3-changes.txt**](./extra/lab3-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
 
 ```
-code -d /workspaces/rag/extra/lab3-changes.txt /workspaces/rag/genai/lab3.py
+code -d /workspaces/rag/extra/lab4-changes.txt /workspaces/rag/genai/lab4.py
 ```
 
 6. Once you have this screen up, take a look at the added functionality in the *lab3-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the arrow between the two files (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
@@ -237,12 +237,12 @@ code -d /workspaces/rag/extra/lab3-changes.txt /workspaces/rag/genai/lab3.py
 7. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
 
 ```
-python lab3.py
+python lab4.py
 ```
 
 8. After the run is complete, you should see additional data from the LLM related to the additional context.
 
-![lab output 3](./images/rag19.png?raw=true "lab output 3")
+![lab output 4](./images/rag19.png?raw=true "lab output 4")
 
 <p align="center">
 **[END OF LAB]**
