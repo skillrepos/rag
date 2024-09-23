@@ -434,7 +434,7 @@ while True:
     if query.strip() == "":
         continue
     agent_executor.invoke({"input": query})
-
+```
 9. Now, run the code.
 ```
 python lab6.py
