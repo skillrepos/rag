@@ -275,13 +275,49 @@ from langchain.chains import GraphCypherQAChain
 from langchain_community.graphs import Neo4jGraph
 from langchain_community.llms import Ollama
 ```
-6. Now, let's add the connection to the graph database. Add the following line to the file.
+6. Now, let's add the connection to the graph database. Add the following to the file.
 ```
-graph = Neo4jGraph(url="bolt://localhost:7687", username="neo4j", password="neo4jtest")
+graph = Neo4jGraph(
+    url="bolt://localhost:7687",
+    username="neo4j",
+    password="neo4jtest",
+    enhanced_schema=True,
+)
 ```
 7. Next, let's create the chain instance that will allow us to leverage the LLM to help create the Cypher query and help frame the answer so it makes sense. We'll use Ollama and our llama3 model for both the LLM to create the Cypher queries and the LLM to help frame the answers.
---- 
-  
+```
+chain = GraphCypherQAChain.from_llm(
+    cypher_llm=Ollama(model="llama3",temperature=0),
+    qa_llm=Ollama(model="llama3",temperature=0),
+    graph=graph, verbose=True,
+)
+```
+
+8. Finally, let's add the code loop to take in a query and invoke the chain. After you've added this code, save the file.
+```
+while True:
+    query = input("\nQuery: ")
+    if query == "exit":
+        break
+    if query.strip() == "":
+        continue
+    response = chain.invoke({"query": query})
+    print(response["result"])
+```
+
+10. Now, run the code.
+```
+python lab5.py
+```
+11. You can prompt it with queries related to the info in the graph database, like:
+```
+Who starred in Star Trek : Generations?
+Which movies are comedies?
+```
+
+
+
+
 9. This program can be run and passed a model to use for tokenization. To start, we'll be using a model named *bert-base-uncased*. Let's look at this model on huggingface.co.  Go to https://huggingface.co/models and in the *Models* search area, type in *bert-base-uncased*. Select the entry for *google-bert/bert-base-uncased*.
 
 ![Finding bert model on huggingface](./images/gaidd12.png?raw=true "Finding bert model on huggingface")
