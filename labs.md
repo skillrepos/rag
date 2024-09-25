@@ -36,13 +36,15 @@ cd genai
 ```
 
 5. For this lab, we have a simple Python program that queries the LLM about the benefits of Python in general. The file name is lab1.py. Open the file either by clicking on [**genai/lab1.py**](./genai/lab1.py) or by entering the command below in the codespace's terminal.
-
 ```
 code lab1.py
 ```
 
-6. You can look around this file to see how it works. Notice the prompt "Explain the benefits of Python" on line 17. When you are done, and after step 2 has completed, go ahead and run the file with the command below. 
+6. You can look around this file to see how it works. It simply passes a direct prompt to the LLM and returns the results. Notice the prompt *"Explain the benefits of Python"* on line 17. At line 22, you can see the request made to Ollama (and the Llama3 model.)
 
+![examining lab1 file](./images/rag04.png?raw=true "examining lab1 file")
+
+7. When you are done examining the code, you can go ahead and run it with the command below. 
 ```
 python lab1.py
 ```
