@@ -267,7 +267,15 @@ python lab4.py
 
 1. In our last lab, we hardcoded Cypher queries and worked more directly with the Graph database. Let's see how we can simplify this.
 
-2. Our graph database is prepopulated with a set of nodes and relationships related to movies. This includes actors and directors associated with movies, as well as the movie's genre, imdb rating, etc. You can take a look at the graph nodes by running the following commands in the terminal.
+2. First, we need a different graph database. Again, we'll use a docker image for this that is already populated with data for us. Change to the neo4j directory and run the script, but note the different parameter ("2" instead of "1"). This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory.
+
+```
+cd /workspaces/rag/neo4j
+./neo4j-setup.sh 1 &
+cd ../genai
+``` 
+
+3. This graph database is prepopulated with a large set of nodes and relationships related to movies. This includes actors and directors associated with movies, as well as the movie's genre, imdb rating, etc. You can take a look at the graph nodes by running the following commands in the terminal.
 
 ```
 npm i -g http-server
