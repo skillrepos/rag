@@ -18,7 +18,7 @@ else
     echo "Image $IMAGE_NAME not found."
 fi 
 
-docker build -t neo4j:custom .
+docker build -f Dockerfile_data$1 -t neo4j:custom .
 docker run \
      --name neo4j \
      -p7474:7474 -p7687:7687 \
