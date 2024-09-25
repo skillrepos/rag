@@ -207,7 +207,7 @@ streamlit run ui_rag.py
 
 **Purpose: In this lab, we'll see how to implement Graph RAG by querying a Neo4j database and using Ollama to generate responses.**
 
-1. For this lab, we'll need a neo4j instance running. We'll use a docker image for this that is already populated with data for us. There is a shell script named [**neo4j/neo4j-setup.sh**](./neo4j/neo4j-setup.sh) that you can run to start the neo4j container running. Change to the neo4j directory and run the script. This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory.
+1. For this lab, we'll need a neo4j instance running. We'll use a docker image for this that is already populated with data for us. There is a shell script named [**neo4j/neo4j-setup.sh**](./neo4j/neo4j-setup.sh) that you can run to start the neo4j container running. Change to the neo4j directory and run the script. This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory. Be sure to include the "&" to run this in the background.
 
 ```
 cd /workspaces/rag/neo4j
@@ -267,29 +267,34 @@ python lab4.py
 
 1. In our last lab, we hardcoded Cypher queries and worked more directly with the Graph database. Let's see how we can simplify this.
 
-2. First, we need a different graph database. Again, we'll use a docker image for this that is already populated with data for us. Change to the neo4j directory and run the script, but note the different parameter ("2" instead of "1"). This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory.
+2. First, we need a different graph database. Again, we'll use a docker image for this that is already populated with data for us. Change to the neo4j directory and run the script, but note the different parameter ("2" instead of "1"). This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory. Be sure to add the "&" to run this in the background.
 
 ```
 cd /workspaces/rag/neo4j
-./neo4j-setup.sh 1 &
-cd ../genai
+./neo4j-setup.sh 2 &
+cd ..
 ``` 
 
-3. This graph database is prepopulated with a large set of nodes and relationships related to movies. This includes actors and directors associated with movies, as well as the movie's genre, imdb rating, etc. You can take a look at the graph nodes by running the following commands in the terminal.
+3. This graph database is prepopulated with a large set of nodes and relationships related to movies. This includes actors and directors associated with movies, as well as the movie's genre, imdb rating, etc. You can take a look at the graph nodes by running the following commands in the terminal. **You should be in the "root" directory (/workspaces/rag) when you run these commands.**
 
 ```
 npm i -g http-server
 http-server
 ```
-3. After a moment, you should see a pop-up dialog that you can click on to open a browser to see some of the nodes in the graph. It will take a minute or two to load and then you can zoom in by using your mouse to see more details.
 
-<to-do: insert screenshot of nodes here>
+3. After a moment, you should see a pop-up dialog that you can click on to open a browser to see some of the nodes in the graph. It will take a minute or two to load and then you can zoom in by using your mouse (roll wheel) to see more details.
 
-4. Now, let's go back and create a file to use the langchain pieces and the llm to query our graph database. Create a new file named lab5.py.
+![running local web server](./images/rag24.png?raw=true "running local web server")
+![loading nodes](./images/rag25.png?raw=true "loading nodes")
+![graph nodes](./images/rag26.png?raw=true "graph nodes")
+
+
+4. When done, you can stop the *http-server* process with *Ctrl-C*. Now, let's go back and create a file to use the langchain pieces and the llm to query our graph database. Change back to the *genai* directory and create a new file named lab5.py.
 ```
+cd genai
 code lab5.py
 ```
-5. First, add the imports from langchain that we need. Put the following lines in the file you just created.
+5. First, add the imports from *langchain* that we need. Put the following lines in the file you just created.
 ```
 from langchain.chains import GraphCypherQAChain
 from langchain_community.graphs import Neo4jGraph
