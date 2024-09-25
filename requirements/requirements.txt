@@ -9,3 +9,4 @@ pypdf
 py2neo
 neo4j
 pyvis
+datasets
