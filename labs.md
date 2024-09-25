@@ -169,7 +169,7 @@ What does the document say about art and literature topics?
 ```
 Give me 5 facts about the Mona Lisa
 ```
-7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc and the rest from the LLM's trained knowledge.
+7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc and the rest from the LLM's trained knowledge.  (While this is running, you can proceed with the other steps starting with step 8.)
 
 ![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
    
@@ -178,7 +178,7 @@ Give me 5 facts about the Mona Lisa
 ```
 code ui_rag.py
 ```
-9. Like the previous program, this file will need a simple PDF file to be used. For convenience, there are two simple *text* PDFs in a GitHub gist (at https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f) that you can download via the command below. You want to run this on your own machine, not in the codespace. This will put the files in a directory named *datafiles* wherever you run it.
+9. Like the previous program, this file will need a simple PDF file to be used. For convenience, there are two simple *text* PDFs in a GitHub gist (at https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f) that you can download via the command below. **Do this on your own machine, not in the codespace.** This will put the files in a directory named *datafiles* wherever you run it.
 
 ```
 git clone https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f datafiles
@@ -189,7 +189,7 @@ git clone https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f d
 streamlit run ui_rag.py
 ```
 
-11. After opeing up the website for the app, you can upload one of the PDF files and ask a question like you did before. The app will show evidence of *Running* in the upper right corner. Also, if you want, you can look back in the codespace's terminals and see the LLM being invoked.
+11. After opeing up the website for the app, you can upload one of the PDF files and ask a question in the "Enter Prompt" field. The app will show evidence of *Running* in the upper right corner. Also, if you want, you can look back in the codespace's terminals and see the LLM being invoked.
 
 ![app running](./images/gaidd58.png?raw=true "App running")
 ![llm being accessed](./images/gaidd56.png?raw=true "LLM being accessed")
@@ -215,19 +215,26 @@ cd /workspaces/rag/neo4j
 cd ../genai
 ```
 
-2. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab3.py. Open the file either by clicking on [**genai/lab3.py**](./genai/lab3.py) or by entering the command below in the codespace's terminal.
+2. When done, you should see an "INFO  Started." message. The container should then be running. You can just hit *Enter* and do a *docker ps* command to verify.
+
+```
+docker ps
+```
+![container check](./images/rag20.png?raw=true "container check")
+
+3. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab3.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the command below in the codespace's terminal.
 
 ```
 code lab4.py
 ```
 
-3. You can look around this file to see how it works. Notice that it simply connects to the graph database, does a query, and returns the results. 
+4. You can look around this file to see how it works. It simply connects to the graph database, does a Cypher query (see the function *query_graph* on line 6), and returns the results. For this one, the graph db was initialized with information that *Ada Lovelace, a Mathematician, worked with Alan Turing, a Computer Scientist*.
 
-4. When done looking at the code, go ahead and execute the program using the command below. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
+5. When done looking at the code, go ahead and execute the program using the command below. When it's done, you'll be able to see the closest match from the knowledge base data file to the query.
 ```
 python lab4.py
 ```
-![running lab4 file](./images/rag17a.png?raw=true "running lab4 file")
+![running lab4 file](./images/rag21.png?raw=true "running lab4 file")
 
 5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab3-changes.txt**](./extra/lab3-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
 
@@ -237,7 +244,7 @@ code -d /workspaces/rag/extra/lab4-changes.txt /workspaces/rag/genai/lab4.py
 
 6. Once you have this screen up, take a look at the added functionality in the *lab3-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the arrow between the two files (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
 
-![lab 3 diff](./images/rag18.png?raw=true "lab 3 diff")
+![lab 4 diff](./images/rag22.png?raw=true "lab 4 diff")
 
 7. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
 
