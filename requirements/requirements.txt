@@ -6,3 +6,5 @@ sentence_transformers
 langchain_community==0.2.6
 fastembed==0.3.2
 pypdf
+py2neo
+
