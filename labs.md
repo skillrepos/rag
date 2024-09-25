@@ -50,17 +50,17 @@ python lab1.py
 ```
 ![running lab1 file](./images/rag09.png?raw=true "running lab1 file")
 
-7. This will take several minutes to run. When it's done, you'll be able to see a rather large amount of output about the benefits of python.
+8. This will take several minutes to run. When it's done, you'll be able to see a rather large amount of output about the benefits of python. (While this is running, you can go ahead and proceed with steps 9-11.)
 
 ![lab output 1](./images/rag10.png?raw=true "lab output 1")
   
-8. Now, let's create a copy of the program that adds context from a local *knowledge base*. For purposes of keeping things simple and quick, we have a local file that we'll use for the additional context. The file name is *data/kb.txt*. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.  
+9. Now, let's create a copy of the program that adds context from a local *knowledge base*. For purposes of keeping things simple and quick, we have a local file that we'll use for the additional context. The file name is *data/kb.txt*. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.  
 
 ```
 code ../data/kb.txt
 ```
 
-9. Now let's update the python file to pass the context from the file. Switch back to the *lab1.py* file. First, after the imports, add the code below to read in the data file.
+10. Now let's update the python file to pass the context from the file. Switch back to the *lab1.py* file. First, after the imports, add the code below to read in the data file.
 
 ```
 # Read the text from the file
@@ -69,21 +69,21 @@ with open("../data/kb.txt", "r") as file:
 ```
 ![mod 1](./images/rag11.png?raw=true "mod 1")
 
-10. Now scroll down to where the prompt is defined (probably around line 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
+11. Now scroll down to where the prompt is defined (probably around line 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
 
 ```
     "prompt": f"Based on the following information, explain the benefits of Python:\n\n{knowledge_data}",
 ```
 ![mod 2](./images/rag12.png?raw=true "mod 2")
 
-11. Save your changes to the file with CMD+S or CTRL+S (or use the three bar menu in the top left of the codespace and drill-down to the File->Save option). Then run the program again.
+12. Save your changes to the file with CMD+S or CTRL+S (or use the three bar menu in the top left of the codespace and drill-down to the File->Save option). Then run the program again.
 
 ```
 (save file)
 python lab1.py
 ```
 
-12. After the run is done, you should see output that indicates the AI referenced the data in the file to help answer the prompt.
+13. After the run is done, you should see output that indicates the AI referenced the data in the file to help answer the prompt.
 
 ![run 2](./images/rag13.png?raw=true "run 2") 
 
