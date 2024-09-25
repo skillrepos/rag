@@ -10,7 +10,7 @@ import streamlit as st
 # set some config variables for ChromaDB
 CHROMA_DATA_PATH = "vdb_data/"
 
-llm = Ollama(model="mistral")
+llm = Ollama(model="llama3")
 
 # Function to perform Retrieval-Augmented Generation (RAG) with PDFs
 def rag_with_pdf(query, pdf_path, llm):
