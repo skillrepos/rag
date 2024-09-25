@@ -1,7 +1,7 @@
 # Gen AI: Understanding and Using RAG
 ## Making LLMs smarter by pairing your data with Gen AI
 ## Session labs 
-## Revision 2.0 - 09/22/24
+## Revision 2.1 - 09/25/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -19,9 +19,10 @@ ollama
 ![downloading ollama](./images/rag05.png?raw=true "downloading ollama")
 ![ollama usage](./images/rag05a.png?raw=true "ollama usage")
 
-2. Next, start the ollama server running and pull down the *llama3* model with the following command:
+2. Next, start the ollama server running and pull down the *llama3* model with the following commands:
 ```
-ollama serve && ollama pull llama3 &
+ollama serve &
+ollama pull llama3
 ```
 ![serve and pull](./images/rag06a.png?raw=true "serve and pull")
 
@@ -40,7 +41,7 @@ cd genai
 code lab1.py
 ```
 
-6. You can look around this file to see how it works. Notice the prompt "Based on the following information, explain the benefits of Python" on line 20. When you are done, and after step 2 has completed, go ahead and run the file with the command below. 
+6. You can look around this file to see how it works. Notice the prompt "Based on the following information, explain the benefits of Python" on line 17. When you are done, and after step 2 has completed, go ahead and run the file with the command below. 
 
 ```
 python lab1.py
