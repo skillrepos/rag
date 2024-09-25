@@ -14,8 +14,10 @@
 1. First, download and install Ollama to allow us to have a local LLM to query. Go to the *TERMINAL* tab in the bottom part of the codespace and execute the command below. Then you can run the actual application to see usage.
 ```
 curl -fsSL https://ollama.com/install.sh | sh
+ollama
 ```
 ![downloading ollama](./images/rag05.png?raw=true "downloading ollama")
+![ollama usage](./images/rag05a.png?raw=true "ollama usage")
 
 2. Next, start the ollama server running and pull down the *llama3* model with the following command:
 ```
