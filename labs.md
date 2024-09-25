@@ -19,7 +19,7 @@ ollama
 ![downloading ollama](./images/rag05.png?raw=true "downloading ollama")
 ![ollama usage](./images/rag05a.png?raw=true "ollama usage")
 
-2. Next, start the ollama server running and pull down the *llama3* model with the following commands:
+2. Next, start the ollama server running in the background with the first command below. After that is done, pull down the *llama3* model with the second command.
 ```
 ollama serve &
 ollama pull llama3
@@ -41,7 +41,7 @@ cd genai
 code lab1.py
 ```
 
-6. You can look around this file to see how it works. Notice the prompt "Based on the following information, explain the benefits of Python" on line 17. When you are done, and after step 2 has completed, go ahead and run the file with the command below. 
+6. You can look around this file to see how it works. Notice the prompt "Explain the benefits of Python" on line 17. When you are done, and after step 2 has completed, go ahead and run the file with the command below. 
 
 ```
 python lab1.py
