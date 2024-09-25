@@ -54,13 +54,13 @@ python lab1.py
 
 ![lab output 1](./images/rag10.png?raw=true "lab output 1")
   
-9. Now, let's create a copy of the program that adds context from a local *knowledge base*. For purposes of keeping things simple and quick, we have a local file that we'll use for the additional context. The file name is *data/kb.txt*. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.  
+9. Now let's update the program to add context from a local *knowledge base*. For purposes of keeping things simple and quick, we have a local file that we'll use for the additional context. The file name is *data/kb.txt*. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.  
 
 ```
 code ../data/kb.txt
 ```
 
-10. Now let's update the python file to pass the context from the file. Switch back to the *lab1.py* file. First, after the imports, add the code below to read in the data file.
+10. Now update the python file to pass the context from the file. Switch back to the *lab1.py* file. First, after the imports, add the code below to read in the data file.
 
 ```
 # Read the text from the file
@@ -69,7 +69,7 @@ with open("../data/kb.txt", "r") as file:
 ```
 ![mod 1](./images/rag11.png?raw=true "mod 1")
 
-11. Now scroll down to where the prompt is defined (probably around line 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
+11. Scroll down to where the prompt is defined (probably around line 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
 
 ```
     "prompt": f"Based on the following information, explain the benefits of Python:\n\n{knowledge_data}",
