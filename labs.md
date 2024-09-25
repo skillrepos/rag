@@ -207,11 +207,11 @@ streamlit run ui_rag.py
 
 **Purpose: In this lab, we'll see how to implement Graph RAG by querying a Neo4j database and using Ollama to generate responses.**
 
-1. For this lab, we'll need a neo4j instance running. We'll use a docker image for this that is already populated with data for us. There is a shell script named [**neo4j/setup-neo4j.sh**](./neo4j/setup-neo4j.sh) that you can run to start the neo4j container running. Change to the neo4j directory and run the script. This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory.
+1. For this lab, we'll need a neo4j instance running. We'll use a docker image for this that is already populated with data for us. There is a shell script named [**neo4j/neo4j-setup.sh**](./neo4j/neo4j-setup.sh) that you can run to start the neo4j container running. Change to the neo4j directory and run the script. This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory.
 
 ```
 cd /workspaces/rag/neo4j
-./setup-neo4j.sh &
+./neo4j-setup.sh 1 &
 cd ../genai
 ```
 
@@ -222,7 +222,7 @@ docker ps
 ```
 ![container check](./images/rag20.png?raw=true "container check")
 
-3. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab3.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the command below in the codespace's terminal.
+3. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab4.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the command below in the codespace's terminal.
 
 ```
 code lab4.py
@@ -236,13 +236,13 @@ python lab4.py
 ```
 ![running lab4 file](./images/rag21.png?raw=true "running lab4 file")
 
-5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama in the last lab. For simplicity, the changes are already in a file in [**extra/lab3-changes.txt**](./extra/lab3-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
+5. Now, let's update the code to pass the retrieved answer to an LLM to expand on. We'll be using the llama3 model that we setup with Ollama previously. For simplicity, the changes are already in a file in [**extra/lab4-changes.txt**](./extra/lab4-changes.txt) To see and merge the differences, we'll use the codespace's built-in diff/merge functionality. Run the command below.
 
 ```
 code -d /workspaces/rag/extra/lab4-changes.txt /workspaces/rag/genai/lab4.py
 ```
 
-6. Once you have this screen up, take a look at the added functionality in the *lab3-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the arrow between the two files (#1 in the screenshot) and then close the diff window via the X in the upper corner (#2 in the screenshot).
+6. Once you have this screen up, take a look at the added functionality in the *lab4-changes.txt* file. Here we are passing the answer collected from the knowledge base onto the LLM and asking it to expand on it. To merge the changes, you can click on the arrows between the two files (#1 and #2 in the screenshot) and then close the diff window via the X in the upper corner (#3 in the screenshot).
 
 ![lab 4 diff](./images/rag22.png?raw=true "lab 4 diff")
 
@@ -252,9 +252,9 @@ code -d /workspaces/rag/extra/lab4-changes.txt /workspaces/rag/genai/lab4.py
 python lab4.py
 ```
 
-8. After the run is complete, you should see additional data from the LLM related to the additional context.
+8. After the run is complete, you should see additional data from the LLM related to the additional context with an interesting result!
 
-![lab output 4](./images/rag19.png?raw=true "lab output 4")
+![lab output 4](./images/rag23.png?raw=true "lab output 4")
 
 <p align="center">
 **[END OF LAB]**
