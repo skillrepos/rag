@@ -349,12 +349,16 @@ Which movies are comedies?
 
 **Purpose: In this lab, we’ll see how to setup an agent using RAG with a tool.**
 
-1. In this lab, we'll download a medical dataset, parse it into a vector database, and create an agent with a tool to help us get answers. First, create a new file for the project.
+1. In this lab, we'll download a medical dataset, parse it into a vector database, and create an agent with a tool to help us get answers. First,let's take a look at a dataset of information we'll be using for our RAG context. We'll be using a medical Q&A dataset called [**keivalya/MedQuad-MedicalQnADataset**](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset). You can go to the page for it on HuggingFace.co and view some of it's data or explore it a bit if you want. To get there, either click on the link above in this step or go to HuggingFace.co and search for "keivalya/MedQuad-MedicalQnADataset" and follow the links.
+   
+![dataset on huggingface](./images/rag27.png?raw=true "dataset on huggingface")    
+
+2. Now, let's create the Python file that will pull the dataset, store it in the vector database and invoke an agent with the tool to use it as RAG. First, create a new file for the project.
 ```
 code lab6.py
 ```
 
-2. Now, add the imports.
+3. Now, add the imports.
 ```
 from datasets import load_dataset
 from langchain_community.document_loaders import DataFrameLoader
@@ -370,7 +374,9 @@ from langchain.agents import create_react_agent
 from langchain import hub
 from langchain.agents import AgentExecutor
 ```
-3. Next, we pull and load the dataset.
+
+4. Next, we pull and load the dataset.
+   
 ```
 data = load_dataset("keivalya/MedQuad-MedicalQnADataset", split='train')
 data = data.to_pandas()
@@ -379,7 +385,7 @@ df_loader = DataFrameLoader(data, page_content_column="Answer")
 df_document = df_loader.load()
 ```
 
-4. Then, we split the text into chunks and load everything into our Chroma vector database.
+5. Then, we split the text into chunks and load everything into our Chroma vector database.
 ```
 from langchain.text_splitter import CharacterTextSplitter
 text_splitter = CharacterTextSplitter(chunk_size=1250,
@@ -394,7 +400,7 @@ embeddings = FastEmbedEmbeddings()
 # embed the chunks as vectors and load them into the database
 db_chroma = Chroma.from_documents(df_document, embeddings, persist_directory=CHROMA_DATA_PATH)
 ```
-5. Set up memory for the chat, and choose the LLM.
+6. Set up memory for the chat, and choose the LLM.
 ```
 conversational_memory = ConversationBufferWindowMemory(
     memory_key='chat_history',
@@ -405,7 +411,7 @@ conversational_memory = ConversationBufferWindowMemory(
 llm = Ollama(model="llama3",temperature=0.0)
 ```
 
-6. Define the mechanism we'll use for the agent and tool to retrieve data. Then define the tool itself.
+7. Now, define the mechanism to use for the agent and retrieving data. ("qa" = question and answer) 
 ```
 qa = RetrievalQA.from_chain_type(
     llm=llm,
@@ -413,6 +419,7 @@ qa = RetrievalQA.from_chain_type(
     retriever=db_chroma.as_retriever()
 )
 
+8. Define the tool itself (calling the "qa" function we just defined above as the tool).
 from langchain.agents import Tool
 
 #Defining the list of tool objects to be used by LangChain.
@@ -428,7 +435,7 @@ tools = [
 ]
 ```
 
-7. Create the agent.
+8. Create the agent using the LangChain project *hwchase17/react-chat*.
 ```
 prompt = hub.pull("hwchase17/react-chat")
 agent = create_react_agent(
@@ -450,7 +457,7 @@ agent_executor = AgentExecutor(agent=agent,
                                )
 ```
 
-8. Add the input processing loop.
+9. Add the input processing loop.
 ```
 while True:
     query = input("\nQuery: ")
@@ -460,11 +467,11 @@ while True:
         continue
     agent_executor.invoke({"input": query})
 ```
-9. Now, run the code.
+10. Now, run the code.
 ```
 python lab6.py
 ```
-10. You can prompt it with queries related to the info in the dataset, like:
+11. You can prompt it with queries related to the info in the dataset, like:
 ```
 I have a patient that may have Botulism. How can I confirm the diagnosis?
 ```
