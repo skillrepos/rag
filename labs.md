@@ -345,7 +345,7 @@ Which movies are comedies?
 </p>
 </br></br>
 
-**Lab 6 - Implementing Agenic RAG**
+**Lab 6 - Implementing Agentic RAG**
 
 **Purpose: In this lab, we’ll see how to setup an agent using RAG with a tool.**
 
