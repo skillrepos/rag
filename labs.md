@@ -89,7 +89,7 @@ python lab1.py
     
 14. After the second run is done, you can look in that terminal and should see output that indicates the AI referenced the data in the file to help answer the prompt.
 
-![run 2](./images/rag13.png?raw=true "run 2") 
+![run 2](./images/rag29.png?raw=true "run 2") 
 
 
 <p align="center">
