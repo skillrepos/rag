@@ -50,13 +50,14 @@ python lab1.py
 ```
 ![running lab1 file](./images/rag09.png?raw=true "running lab1 file")
 
-8. This will take several minutes to run. When it's done, you'll be able to see a rather large amount of output about the benefits of python. (While this is running, you can go ahead and proceed with steps 9-11.)
+8. This will take several minutes to run. When it's done, you'll be able to see a rather large amount of output about the benefits of python. (While this is running, you can go ahead and proceed with steps 9-11. You can click on the "+" sign (circled in the figure) to open another terminal.)
 
-![lab output 1](./images/rag10.png?raw=true "lab output 1")
+![lab output 1](./images/rag10a.png?raw=true "lab output 1")
   
 9. Now let's update the program to add context from a local *knowledge base*. For purposes of keeping things simple and quick, we have a local file that we'll use for the additional context. The file name is *data/kb.txt*. Open the file either by clicking on [**data/kb.txt**](./data/kb.txt) or by entering the command below in the codespace's terminal.  
 
 ```
+cd genai (if not there)
 code ../data/kb.txt
 ```
 
@@ -69,7 +70,7 @@ with open("../data/kb.txt", "r") as file:
 ```
 ![mod 1](./images/rag11.png?raw=true "mod 1")
 
-11. Scroll down to where the prompt is defined (probably around line 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
+11. Scroll down to where the prompt is defined (probably around line 19 or 20) and modify that line to use the prompt below. Notice that it adds on the "{knowledge_data}" section, which is the content we read in. It also sets context for the LLM "Based on the following information" which refers to the knowledge base again.
 
 ```
     "prompt": f"Based on the following information, explain the benefits of Python:\n\n{knowledge_data}",
@@ -82,8 +83,11 @@ with open("../data/kb.txt", "r") as file:
 (save file)
 python lab1.py
 ```
+13. If you haven't looked at the output from the first run, you can switch back to the shell where that is to see that output.
 
-13. After the run is done, you should see output that indicates the AI referenced the data in the file to help answer the prompt.
+![lab output 1](./images/rag28.png?raw=true "lab output 1")
+    
+14. After the second run is done, you can look in that terminal and should see output that indicates the AI referenced the data in the file to help answer the prompt.
 
 ![run 2](./images/rag13.png?raw=true "run 2") 
 
