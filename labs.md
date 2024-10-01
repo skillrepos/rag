@@ -194,7 +194,7 @@ Don’t justify your answers.
 ```
 ![new prompt template](./images/rag32.png?raw=true "new prompt template")
 
-10. **Save your changes** and run the program. This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.
+10. **Save your changes** and run the program. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)
 
 ```
 python rag.py ../samples/data.pdf
