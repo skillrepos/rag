@@ -219,12 +219,12 @@ cd /workspaces/rag/neo4j
 cd ../genai
 ```
 
-2. When done, you should see an "INFO  Started." message. The container should then be running. You can just hit *Enter* and do a *docker ps* command to verify.
+2. When done, you should see an "*=> => naming to docker.i/library/neo4j:custom*" message. The container should then be running. You can just hit *Enter* and do a *docker ps* command to verify.
 
 ```
 docker ps
 ```
-![container check](./images/rag20.png?raw=true "container check")
+![container check](./images/rag34.png?raw=true "container check")
 
 3. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab4.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the command below in the codespace's terminal.
 
