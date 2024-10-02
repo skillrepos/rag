@@ -1,6 +1,3 @@
-CREATE (p:Person {name: 'Ada Lovelace', profession: 'Mathematician'})
-CREATE (p2:Person {name: 'Alan Turing', profession: 'Computer Scientist'})
-CREATE (p)-[:WORKED_WITH]->(p2)
 LOAD CSV WITH HEADERS FROM 
 'https://raw.githubusercontent.com/tomasonjo/blog-datasets/main/movies/movies_small.csv'
 AS row
