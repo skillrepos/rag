@@ -215,7 +215,9 @@ python rag.py ../samples/data.pdf
 
 ```
 cd /workspaces/rag/neo4j
+
 ./neo4j-setup.sh 1 &
+
 cd ../genai
 ```
 
@@ -226,7 +228,7 @@ docker ps
 ```
 ![container check](./images/rag34.png?raw=true "container check")
 
-3. For this lab, in the same *genai* directory, we have a simple Python program to interact with the graph database and query it. The file name is lab4.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the command below in the codespace's terminal.
+3. For the next steps, make sure you're back in the *genai* directory. In here, we have a simple Python program to interact with the graph database and query it. The file name is lab4.py. Open the file either by clicking on [**genai/lab4.py**](./genai/lab4.py) or by entering the *code* command below in the codespace's terminal.
 
 ```
 code lab4.py
@@ -250,7 +252,7 @@ code -d /workspaces/rag/extra/lab4-changes.txt /workspaces/rag/genai/lab4.py
 
 ![lab 4 diff](./images/rag22.png?raw=true "lab 4 diff")
 
-7. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.
+7. Now, you can go ahead and run the updated file again to see what the LLM generates using the added context. Note: This will take several minutes to run.  (If you happen to get an error about not being able to establish a connection, your ollama server may not be running any longer.  If that's the case, you can restart it via the command *"ollama serve &"* and then rerun the python command again.)
 
 ```
 python lab4.py
@@ -271,7 +273,7 @@ python lab4.py
 
 1. In our last lab, we hardcoded Cypher queries and worked more directly with the Graph database. Let's see how we can simplify this.
 
-2. First, we need a different graph database. Again, we'll use a docker image for this that is already populated with data for us. Change to the neo4j directory and run the script, but note the different parameter ("2" instead of "1"). This will take a few minutes to build and start. Afterwards you can change back to the *genai* subdirectory. Be sure to add the "&" to run this in the background.
+2. First, we need a different graph database. Again, we'll use a docker image for this that is already populated with data for us. Change to the neo4j directory and run the script, but note the different parameter ("2" instead of "1"). This will take a few minutes to build and start. Afterwards you can change back to the *workspaces/rag* subdirectory. Be sure to add the "&" to run this in the background.
 
 ```
 cd /workspaces/rag/neo4j
@@ -422,10 +424,12 @@ qa = RetrievalQA.from_chain_type(
     chain_type="stuff",
     retriever=db_chroma.as_retriever()
 )
+```
 
 8. Define the tool itself (calling the "qa" function we just defined above as the tool).
 from langchain.agents import Tool
 
+```
 #Defining the list of tool objects to be used by LangChain.
 tools = [
    Tool(
@@ -471,7 +475,7 @@ while True:
         continue
     agent_executor.invoke({"input": query})
 ```
-10. Now, run the code.
+10. Now, **save the file** and run the code.
 ```
 python lab6.py
 ```
